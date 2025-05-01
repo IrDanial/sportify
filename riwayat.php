@@ -28,45 +28,10 @@ while ($plan = mysqli_fetch_assoc($plans)) {
     <meta charset="UTF-8">
     <title>Riwayat Olahraga - SPORTIFY</title>
     <link rel="stylesheet" href="assets/style.css">
-    <style>
-        .box {
-            background-color: #b0bec5;
-            padding: 40px;
-            border-radius: 15px;
-            width: 50%;
-            margin: 100px auto;
-            text-align: center;
-        }
-
-        .history-btn {
-            background-color: #fff59d;
-            padding: 10px 20px;
-            margin: 10px;
-            display: inline-block;
-            border-radius: 8px;
-            font-weight: bold;
-            border: none;
-        }
-
-        .empty-msg {
-            font-style: italic;
-            color: #444;
-            margin: 20px;
-        }
-
-        .selesai-btn {
-            margin-top: 30px;
-            background-color: #fff176;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-weight: bold;
-            border: none;
-        }
-    </style>
 </head>
 
 <body class="riwayat-page">
-    <div class="box">
+    <div class="box-riwayat">
         <h2>Riwayat Olahraga</h2>
         <?php if (!empty($all_exercises)): ?>
             <?php foreach ($all_exercises as $exercise): ?>

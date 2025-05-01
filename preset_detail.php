@@ -20,11 +20,12 @@ if (!isset($workouts[$preset])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Edit Preset <?= ucfirst(str_replace("_", " ", $preset)) ?> - SPORTIFY</title>
     <link rel="stylesheet" href="assets/style.css">
-    <style>
+    <!-- <style>
         body {
             background: url("assets/images/background.jpg") no-repeat center center fixed;
             background-size: cover;
@@ -66,37 +67,41 @@ if (!isset($workouts[$preset])) {
             cursor: pointer;
             margin-top: 20px;
         }
-    </style>
+    </style> -->
 </head>
+
 <body>
-    <div class="box">
-        <h2>Edit Preset <?= ucfirst(str_replace("_", " ", $preset)) ?></h2>
-        <form method="post" action="save_jadwal.php" onsubmit="return validateForm()">
-            <?php foreach ($workouts[$preset] as $index => $exercise): ?>
-                <div class="latihan-item">
-                    <input type="text" name="exercises[]" value="<?= htmlspecialchars($exercise) ?>" required>
-                    <input type="checkbox" name="active[]" value="<?= $index ?>">
-                </div>
-            <?php endforeach; ?>
+    <div class="container">
+        <div class="box">
+            <h2>Edit Preset <?= ucfirst(str_replace("_", " ", $preset)) ?></h2>
+            <form method="post" action="save_jadwal.php" onsubmit="return validateForm()">
+                <?php foreach ($workouts[$preset] as $index => $exercise): ?>
+                    <div class="latihan-item">
+                        <input type="text" name="exercises[]" value="<?= htmlspecialchars($exercise) ?>" required>
+                        <input type="checkbox" name="active[]" value="<?= $index ?>">
+                    </div>
+                <?php endforeach; ?>
 
-            <label>Notifikasi:</label>
-            <input type="time" name="notifikasi" required><br>
+                <label>Notifikasi:</label>
+                <input type="time" name="notifikasi" required><br>
 
-            <input type="hidden" name="preset" value="<?= htmlspecialchars($preset) ?>">
-            <button type="submit" class="submit-btn">Selesai</button>
-        </form>
-        <br><a href="preset.php"><button>Kembali</button></a>
-    </div>
+                <input type="hidden" name="preset" value="<?= htmlspecialchars($preset) ?>">
+                <button type="submit" class="submit-btn">Selesai</button>
+            </form>
+            <br><a href="preset.php"><button>Kembali</button></a>
+        </div>
 
-    <script>
-        function validateForm() {
-            const checkboxes = document.querySelectorAll('input[name="active[]"]:checked');
-            if (checkboxes.length === 0) {
-                alert('Pilih setidaknya satu latihan!');
-                return false;
+        <script>
+            function validateForm() {
+                const checkboxes = document.querySelectorAll('input[name="active[]"]:checked');
+                if (checkboxes.length === 0) {
+                    alert('Pilih setidaknya satu latihan!');
+                    return false;
+                }
+                return true;
             }
-            return true;
-        }
-    </script>
+        </script>
+    </div>
 </body>
+
 </html>
