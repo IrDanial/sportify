@@ -76,3 +76,109 @@ select {
   padding: 10px;
   border-radius: 8px;
 }
+.register-box {
+  background-color: #fff59d;
+  padding: 70px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.register-box form label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.register-box input,
+.register-box select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: none;
+  background-color: #b3e5fc;
+  font-size: 14px;
+}
+
+.register-box button {
+  width: 100%;
+  padding: 12px;
+  background-color: #cfd8dc;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.register-box button:hover {
+  background-color: #b0bec5;
+}
+
+.register-box p {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.register-box p a {
+  color: #1565c0;
+  text-decoration: none;
+}
+
+.register-box p a:hover {
+  text-decoration: underline;
+}
+.login-box {
+  background-color: #fff59d;
+  padding: 70px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.jadwal-box {
+  padding: 30px;
+  border-radius: 15px;
+  width: 300px;
+  min-height: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.jadwal-box h2 {
+  margin-top: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.jadwal-box table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.jadwal-box th,
+.jadwal-box td {
+  padding: 8px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.logout-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #cfd8dc;
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #a9cbd4;
+}

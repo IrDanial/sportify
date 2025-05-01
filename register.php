@@ -28,22 +28,38 @@ if (isset($_POST['register'])) {
     <link rel="stylesheet" href="assets/style.css">
 </head>
 
-<body class="register-page">
-    <div class="box">
-        <h1>SPORTIFY</h1>
-        <form method="post">
-            <input type="text" name="username" placeholder="Username" required><br>
-            <input type="email" name="email" placeholder="Email" required><br>
-            <input type="text" name="full_name" placeholder="Nama Lengkap" required><br>
-            <select name="gender" required>
-                <option value="">Jenis Kelamin</option>
-                <option value="M">Laki-laki</option>
-                <option value="F">Perempuan</option>
-            </select><br>
-            <input type="date" name="birthdate" required><br>
-            <input type="password" name="password" placeholder="Password" required><br>
-            <button type="submit" name="register">Buat Akun</button>
-        </form>
+<body>
+    <div class="container">
+        <div class="left">
+            <h1>SPORTIFY</h1>
+        </div>
+        <div class="register-box">
+            <form method="post">
+                <label for="username">Username</label>
+                <input type="text" name="username" required><br>
+
+                <label for="email">Email</label>
+                <input type="email" name="email" required><br>
+
+                <label for="password">Password</label>
+                <input type="password" name="password" required><br>
+
+                <label for="full_name">Nama lengkap</label>
+                <input type="text" name="full_name" required><br>
+
+                <label for="gender">Gender</label>
+                <select name="gender" required>
+                    <option value="M">Laki-laki</option>
+                    <option value="F">Perempuan</option>
+                </select><br>
+
+                <label for="birthdate">Tanggal Lahir</label>
+                <input type="date" name="birthdate" required><br>
+
+                <button type="submit" name="register">Buat Akun</button>
+            </form>
+            <p>Sudah punya akun? <a href="login.php">Login di sini</a></p>
+        </div>
     </div>
 </body>
 
