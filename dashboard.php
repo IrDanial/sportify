@@ -19,28 +19,51 @@ if (isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="assets/style.css">
 </head>
 
-<body class="dashboard-page">
-    <div class="box">
-        <h1>SPORTIFY</h1>
-        <?php
-        date_default_timezone_set('Asia/Jakarta');
-        $now = date('H:i');
+<body>
+    <div class="container">
+        <div class="left">
+            <h1>SPORTIFY</h1>
+            <button class="btn">Buat Jadwal Baru</button>
+            <button class="btn">Riwayat</button>
+        </div>
 
-        $cekjadwal = mysqli_query($conn, "SELECT * FROM Workout_Plans WHERE user_id='$user_id'");
-        while ($jadwal = mysqli_fetch_assoc($cekjadwal)) {
-            if (strpos($jadwal['description'], 'Notifikasi:') !== false) {
-                $notif_time = trim(str_replace('Notifikasi:', '', $jadwal['description']));
-                if ($now >= $notif_time) {
-                    echo "<script>alert('Waktunya latihan: " . htmlspecialchars($jadwal['title']) . "');</script>";
-                    break;
+        <div class="right">
+            <div class="jadwal-box">
+                <h2>Jadwal Olahraga</h2>
+                <?php
+                date_default_timezone_set('Asia/Jakarta');
+                $now = date('H:i');
+
+                $cekjadwal = mysqli_query($conn, "SELECT * FROM Workout_Plans WHERE user_id='$user_id'");
+
+                if (mysqli_num_rows($cekjadwal) > 0) {
+                    echo "<table>";
+                    echo "<tr><th>Judul</th><th>Deskripsi</th><th>Waktu</th></tr>";
+                    while ($jadwal = mysqli_fetch_assoc($cekjadwal)) {
+                        $notif_time = '';
+                        if (strpos($jadwal['description'], 'Notifikasi:') !== false) {
+                            $notif_time = trim(str_replace('Notifikasi:', '', $jadwal['description']));
+                        }
+
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($jadwal['title']) . "</td>";
+                        echo "<td>" . htmlspecialchars($jadwal['description']) . "</td>";
+                        echo "<td>" . htmlspecialchars($jadwal['time']) . "</td>";
+                        echo "</tr>";
+
+                        if ($notif_time && $now >= $notif_time) {
+                            echo "<script>alert('Waktunya latihan: " . htmlspecialchars($jadwal['title']) . "');</script>";
+                        }
+                    }
+                    echo "</table>";
+                } else {
+                    echo "<p>Belum ada jadwal olahraga yang disimpan.</p>";
                 }
-            }
-        }
-        ?>
-        <a href="profile.php"><button>Profil</button></a>
-        <a href="preset.php"><button>Buat Jadwal Baru</button></a>
-        <a href="riwayat.php"><button>Riwayat</button></a><br><br>
-        <a href="logout.php"><button>Logout</button></a>
+                ?>
+            </div>
+        </div>
+
+        <button class="logout-button">Logout</button>
     </div>
 </body>
 

@@ -40,15 +40,20 @@ if (isset($_POST['login'])) {
     <link rel="stylesheet" href="assets/style.css">
 </head>
 
-<body class="login-page">
-    <div class="box">
-        <h1>SPORTIFY</h1>
-        <form method="post">
-            <input type="email" name="email" placeholder="Email" required><br>
-            <input type="password" name="password" placeholder="Password" required><br>
-            <button type="submit" name="login">Login</button>
-        </form>
-    </div>
+<body>
+    <div class="container">
+        <div class="left">
+            <h1>SPORTIFY</h1>
+        </div>
+        <div class="login-box">
+            <form method="post">
+                <label for="email">Email</label>
+                <input type="email" name="email" placeholder="Email" required><br>
+                <label for="password">Password</label>
+                <input type="password" name="password" placeholder="Password" required><br>
+                <button type="submit" name="login">Login</button>
+            </form>
+        </div>
 </body>
 
 </html>
