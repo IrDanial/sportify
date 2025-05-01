@@ -10,14 +10,14 @@ if (isset($_SESSION['user_id'])) {
     exit();
 }
 ?>
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>Dashboard SPORTIFY</title>
     <link rel="stylesheet" href="assets/style.css">
-</head>
+</head> -->
 
 <!-- <body>
     <div class="container">
@@ -67,4 +67,4 @@ if (isset($_SESSION['user_id'])) {
     </div>
 </body> -->
 
-</html>
+<!-- </html> -->
