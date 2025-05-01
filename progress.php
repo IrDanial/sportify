@@ -15,6 +15,8 @@ $weights = [];
 while ($row = mysqli_fetch_assoc($result)) {
     $dates[] = $row['date'];
     $weights[] = $row['weight_kg'];
+    $body_fats[] = $row['body_fat_percent'];
+    $muscle_masses[] = $row['muscle_mass'];
 }
 ?>
 <!DOCTYPE html>
@@ -34,6 +36,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         <canvas id="bodyFatChart" width="300" height="300"></canvas>
         <canvas id="muscleChart" width="300" height="300"></canvas>
         <br><a href="dashboard.php"><button>Kembali</button></a>
+        <a href="input_progress.php"><button>Input Baru</button></a>
     </div>
 
     <script>
