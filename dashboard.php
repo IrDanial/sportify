@@ -187,6 +187,7 @@ mysqli_data_seek($plans, 0); // Reset pointer hasil query agar bisa digunakan la
 
                 $plan_id = $plan['plan_id'];
                 $exercises = mysqli_query($conn, "SELECT * FROM Exercises WHERE plan_id='$plan_id'");
+                $jam12 = $notif ? date("h:i A", strtotime($notif)) : '';
             ?>
             <div class="plan-box">
                 <div class="plan-header">
