@@ -10,16 +10,16 @@ if (isset($_SESSION['user_id'])) {
     exit();
 }
 ?>
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>Dashboard SPORTIFY</title>
     <link rel="stylesheet" href="assets/style.css">
-</head> -->
+</head>
 
-<!-- <body>
+<body>
     <div class="container">
         <div class="left">
             <h1>SPORTIFY</h1>
@@ -30,7 +30,7 @@ if (isset($_SESSION['user_id'])) {
         <div class="right">
             <div class="jadwal-box">
                 <h2>Jadwal Olahraga</h2>
-                <php
+                <?php
                 date_default_timezone_set('Asia/Jakarta');
                 $now = date('H:i');
 
@@ -65,6 +65,6 @@ if (isset($_SESSION['user_id'])) {
 
         <button class="logout-button">Logout</button>
     </div>
-</body> -->
+</body>
 
-<!-- </html> -->
+</html>
