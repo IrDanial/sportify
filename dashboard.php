@@ -38,63 +38,64 @@ while ($plan = mysqli_fetch_assoc($plans)) {
 }
 mysqli_data_seek($plans, 0); // reset pointer hasil query
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Dashboard SPORTIFY</title>
     <link rel="stylesheet" href="assets/style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-
 <body>
 
-    <a href="logout.php"><button class="logout-button">Logout</button></a>
+<a href="logout.php"><button class="logout-button">Logout</button></a>
 
-    <div class="container">
-        <div class="left">
-            <h1>SPORTIFY</h1>
-            <a href="preset.php"><button>Buat Jadwal Baru</button></a>
-            <a href="riwayat.php"><button>Riwayat</button></a>
-        </div>
-
-        <div class="right">
-            <h2>Jadwal Olahraga</h2>
-
-            <?php while ($plan = mysqli_fetch_assoc($plans)): ?>
-                <?php
-                $notif = '';
-                if (strpos($plan['description'], 'Notifikasi:') !== false) {
-                    $notif = trim(str_replace('Notifikasi:', '', $plan['description']));
-                }
-
-                $plan_id = $plan['plan_id'];
-                $exercises = mysqli_query($conn, "SELECT * FROM Exercises WHERE plan_id='$plan_id'");
-                $jam12 = $notif ? date("h:i A", strtotime($notif)) : '';
-                ?>
-                <div class="plan-box">
-                    <div class="plan-header">
-                        <?= htmlspecialchars($plan['title']) ?> <?= $notif ? "<small>$notif</small>" : '' ?>
-                        <a href="hapus_jadwal.php?id=<?= $plan_id ?>" onclick="return confirm('Yakin hapus jadwal ini?')">
-                            <button class="hapus-jadwal">🗑️</button>
-                        </a>
-                    </div>
-                    <div class="plan-body">
-                        <?php while ($ex = mysqli_fetch_assoc($exercises)): ?>
-                            <div class="exercise-item">
-                                <?= htmlspecialchars($ex['name']) ?>
-                                <label class="check-icon">
-                                    <input type="checkbox">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                        <?php endwhile; ?>
-                    </div>
-                </div>
-            <?php endwhile; ?>
-        </div>
+<div class="container">
+    <div class="left">
+        <h1>SPORTIFY</h1>
+        <a href="preset.php"><button>Buat Jadwal Baru</button></a>
+        <a href="riwayat.php"><button>Riwayat</button></a>
     </div>
+
+    <div class="right">
+        <h2>Jadwal Olahraga</h2>
+
+        <?php while ($plan = mysqli_fetch_assoc($plans)): ?>
+            <?php
+            $notif = '';
+            if (strpos($plan['description'], 'Notifikasi:') !== false) {
+                $notif = trim(str_replace('Notifikasi:', '', $plan['description']));
+            }
+
+            $plan_id = $plan['plan_id'];
+            $exercises = mysqli_query($conn, "SELECT * FROM Exercises WHERE plan_id='$plan_id'");
+            ?>
+            <div class="plan-box">
+                <div class="plan-header">
+                    <?= htmlspecialchars($plan['title']) ?> <?= $notif ? "<small>$notif</small>" : '' ?>
+                    <a href="hapus_jadwal.php?id=<?= $plan_id ?>" onclick="return confirm('Yakin hapus jadwal ini?')">
+                        <button class="hapus-jadwal">🗑️</button>
+                    </a>
+                    <a href="edit_jadwal.php?id=<?= $plan_id ?>">
+                        <button class="edit-jadwal">✏️ Edit</button>
+                    </a>
+                </div>
+                <div class="plan-body">
+                    <?php while ($ex = mysqli_fetch_assoc($exercises)): ?>
+                        <div class="exercise-item">
+                            <?= htmlspecialchars($ex['name']) ?>
+                            <label class="check-icon">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    <?php endwhile; ?>
+                </div>
+            </div>
+        <?php endwhile; ?>
+    </div>
+</div>
 
     <?php if ($popup_message): ?>
         <script>
@@ -121,5 +122,4 @@ mysqli_data_seek($plans, 0); // reset pointer hasil query
     <?php endif; ?>
 
 </body>
-
 </html>

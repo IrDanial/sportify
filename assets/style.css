@@ -390,12 +390,13 @@ h1 {
   }
 }
 .box {
-  background-color: #cfd8dc;
-  width: 500px;
+  background-color: #b0bec5;
+  width: 80%;
+  max-width: 900px;
   margin: 60px auto;
-  padding: 40px;
+  padding: 30px;
   border-radius: 15px;
-  text-align: center;
+  position: relative;
 }
 
 input[type="text"] {
@@ -475,4 +476,18 @@ input[type="time"] {
   font-weight: bold;
   border: none;
   cursor: pointer;
+}
+
+.tombol-kembali {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: transparent;
+  border: none;
+  font-size: 26px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.tombol-kembali:hover {
+  color: red;
 }
