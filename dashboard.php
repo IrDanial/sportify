@@ -15,24 +15,28 @@ $now = date('H:i');
 $plans = mysqli_query($conn, "SELECT * FROM Workout_Plans WHERE user_id='$user_id' ORDER BY created_at DESC");
 
 // Persiapkan notifikasi popup
-$popup_message = '';
+$notif_array = [];
 while ($plan = mysqli_fetch_assoc($plans)) {
     if (strpos($plan['description'], 'Notifikasi:') !== false) {
         $notif_time = trim(str_replace('Notifikasi:', '', $plan['description']));
-        if ($now >= $notif_time) {
-            $plan_id = $plan['plan_id'];
-            $plan_title = htmlspecialchars($plan['title']);
-            $popup_message .= "<b>$plan_title</b><br>";
+        $notif_time_full = date('Y-m-d') . ' ' . $notif_time;
 
-            // Ambil detail latihan
-            $exercises_result = mysqli_query($conn, "SELECT * FROM Exercises WHERE plan_id='$plan_id'");
-            while ($exercise = mysqli_fetch_assoc($exercises_result)) {
-                $popup_message .= htmlspecialchars($exercise['name']) . "<br>";
-            }
+        $plan_id = $plan['plan_id'];
+        $plan_title = htmlspecialchars($plan['title']);
+        $popup_message = "<b>$plan_title</b><br>";
+
+        $exercises_result = mysqli_query($conn, "SELECT * FROM Exercises WHERE plan_id='$plan_id'");
+        while ($exercise = mysqli_fetch_assoc($exercises_result)) {
+            $popup_message .= htmlspecialchars($exercise['name']) . "<br>";
         }
+
+        $notif_array[] = [
+            'waktu' => $notif_time_full,
+            'pesan' => $popup_message
+        ];
     }
 }
-mysqli_data_seek($plans, 0); // Reset pointer hasil query agar bisa digunakan lagi
+mysqli_data_seek($plans, 0); // reset pointer hasil query
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,6 +45,7 @@ mysqli_data_seek($plans, 0); // Reset pointer hasil query agar bisa digunakan la
     <meta charset="UTF-8">
     <title>Dashboard SPORTIFY</title>
     <link rel="stylesheet" href="assets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -92,11 +97,27 @@ mysqli_data_seek($plans, 0); // Reset pointer hasil query agar bisa digunakan la
     </div>
 
     <?php if ($popup_message): ?>
-        <div class="popup" id="notifPopup">
-            <h3>Saatnya Berolahraga!</h3>
-            <?= $popup_message ?>
-            <button onclick="document.getElementById('notifPopup').style.display='none'">Oke</button>
-        </div>
+        <script>
+            const notifications = <?= json_encode($notif_array) ?>;
+
+            notifications.forEach(notif => {
+                const targetTime = new Date(notif.waktu).getTime();
+                const now = new Date().getTime();
+                const delay = targetTime - now;
+
+                if (delay > 0) {
+                    setTimeout(() => {
+                        Swal.fire({
+                            title: 'Saatnya Berolahraga!',
+                            html: notif.pesan,
+                            icon: 'info',
+                            confirmButtonText: 'Oke!'
+                        });
+                    }, delay);
+                }
+            });
+        </script>
+
     <?php endif; ?>
 
 </body>
